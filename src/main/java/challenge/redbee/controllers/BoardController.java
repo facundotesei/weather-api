@@ -4,9 +4,10 @@ import challenge.redbee.domain.Board;
 import challenge.redbee.services.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.web.util.HtmlUtils;
 
 
 @RestController
@@ -25,6 +26,12 @@ public class BoardController {
 //    @GetMapping
 //    @ResponseStatus(HttpStatus.OK)
 //    public Iterable<Board> getListOfBoards(@RequestParam("user") Long userId){ return boardService.getAllBoards(userId); }
+
+    @MessageMapping("/getBoard")
+    @SendTo("/suscribers/board")
+    public Board board(Long id) throws Exception {
+        return boardService.getBoardById(id);
+    }
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)

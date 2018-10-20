@@ -1,8 +1,6 @@
-FROM maven:3.5-jdk-8-alpine
-
-WORKDIR /usr/src/app
-
-COPY . /usr/src/app
-
-CMD ["mvn", "spring-boot:run"]
+FROM openjdk:8-jdk-alpine
+VOLUME /tmp
 EXPOSE 8080
+ARG JAR_FILE=target/spring5-mvc-rest-0.0.1-SNAPSHOT.jar
+COPY ${JAR_FILE} app.jar
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]

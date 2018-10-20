@@ -1,16 +1,2 @@
---
+
 -- INSERT INTO competidor (nombre, categoria, club, tripulantes, operador) VALUES ('Chaca','categoria 1','Chacarita',4,'Luis Miguel');
--- INSERT INTO competidor (nombre, categoria, club, tripulantes, operador) VALUES ('Racing','categoria 1','Racing Club',4,'Enrique Lopez');
--- INSERT INTO competidor (nombre, categoria, club, tripulantes, operador) VALUES ('Boca','categoria 1','Boca Juniors',4,'Guillermo Antonio');
--- INSERT INTO competidor (nombre, categoria, club, tripulantes, operador) VALUES ('River','categoria 1','River Plate',4,'Marcelo Gallardo');
--- INSERT INTO competidor (nombre, categoria, club, tripulantes, operador) VALUES ('Gimnasia','categoria 1','Gimnasia',4,'Julian Coria');
--- INSERT INTO competidor (nombre, categoria, club, tripulantes, operador) VALUES ('Barcelona','categoria 1','Barcelona',4,'Lionel Messi');
--- INSERT INTO competidor (nombre, categoria, club, tripulantes, operador) VALUES ('Real','categoria 1','Real Madrid',4,'Sergio Ramos');
--- INSERT INTO competidor (nombre, categoria, club, tripulantes, operador) VALUES ('Inter','categoria 1','Inter',4,'Javier Zanetti');
--- INSERT INTO competidor (nombre, categoria, club, tripulantes, operador) VALUES ('Milan','categoria 1','Milan',4,'Andrea Pirlo');
--- INSERT INTO competidor (nombre, categoria, club, tripulantes, operador) VALUES ('Juventus','categoria 1','Juventus',4,'Fabrizio Arraxio');
--- INSERT INTO competidor (nombre, categoria, club, tripulantes, operador) VALUES ('Lazio','categoria 1','Lazio',4,'Gabriel Del pozo');
--- INSERT INTO competidor (nombre, categoria, club, tripulantes, operador) VALUES ('Velez','categoria 1','Velez',4,'Mauricio Huks');
--- INSERT INTO competidor (nombre, categoria, club, tripulantes, operador) VALUES ('Almagro','categoria 1','Almagro',4,'Angelica sadog');
--- INSERT INTO competidor (nombre, categoria, club, tripulantes, operador) VALUES ('Junin','categoria 1','Junin',4,'Luis Wainrach');
--- INSERT INTO competidor (nombre, categoria, club, tripulantes, operador) VALUES ('La Velera','categoria 1','Defensa ',4,'Lucas Lauriente');

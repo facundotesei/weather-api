@@ -18,9 +18,9 @@ public class ScheduledTasks {
 
     @Scheduled(fixedRate = 20000)
     public void reportCurrentTime() {
-        log.info(" ===================== STARTING POLLING SERVICE. ===================== \n");
+        log.info(" || ====================== STARTING POLLING SERVICE. ====================== || \n");
         locacionService.updateLocaciones();
-        log.info(" ===================== POLLING SERVICE FINISHED. ===================== \n\n\n\n");
+        log.info(" || ====================== POLLING SERVICE FINISHED. ====================== || \n\n\n\n");
     }
 }
 

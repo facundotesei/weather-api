@@ -53,14 +53,11 @@ public class Locacion implements Serializable {
     }
 
     @Override
-    public int hashCode() {
-
-        return Objects.hash(id, name, main, coord, wind, clouds);
-    }
+    public int hashCode() { return Objects.hash(id, name, main, coord, wind, clouds); }
 
     @Override
     public String toString() {
-        return "Locacion { " +
+        return "LOCATION { " +
                 "ID = " + id +
                 ", NAME =  '" + name + '\'' +
                 ", WEATHER = " + weather +

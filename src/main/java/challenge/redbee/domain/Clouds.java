@@ -31,8 +31,5 @@ public class Clouds implements Serializable {
     }
 
     @Override
-    public int hashCode() {
-
-        return Objects.hash(super.hashCode(), cloudiness);
-    }
+    public int hashCode() { return Objects.hash(super.hashCode(), cloudiness); }
 }

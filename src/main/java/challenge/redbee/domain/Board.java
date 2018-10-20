@@ -19,7 +19,7 @@ public class Board  implements Serializable{
 
     private String name;
 
-    @ManyToMany(cascade = {
+    @ManyToMany(fetch = FetchType.EAGER,cascade = {
             CascadeType.PERSIST,
             CascadeType.MERGE
     })

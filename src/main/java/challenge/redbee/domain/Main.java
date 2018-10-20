@@ -40,7 +40,6 @@ public class Main implements Serializable {
 
     @Override
     public int hashCode() {
-
         return Objects.hash(super.hashCode(), humidity, pressure, temp_max, temp_min, temp);
     }
 }

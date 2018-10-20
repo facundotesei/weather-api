@@ -33,8 +33,5 @@ public class Wind implements Serializable {
     }
 
     @Override
-    public int hashCode() {
-
-        return Objects.hash(super.hashCode(), speed, deg);
-    }
+    public int hashCode() { return Objects.hash(super.hashCode(), speed, deg); }
 }

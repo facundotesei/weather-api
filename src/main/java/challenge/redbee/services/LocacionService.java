@@ -2,8 +2,6 @@ package challenge.redbee.services;
 
 import challenge.redbee.domain.Locacion;
 
-import java.util.HashSet;
-
 public interface LocacionService {
 
     Locacion getLocacionById(Long id);
@@ -12,11 +10,13 @@ public interface LocacionService {
 
     Locacion saveLocacion(Locacion locacion);
 
+    Locacion updateLocacion(Long id, Locacion locacion);
+
     void deleteById(Long id);
 
     void updateLocaciones();
 
-    void fetchAndCompare(Locacion locacion);
+    void fetchAndCompare(Locacion locacion); //Era para Testing
 
 
 }

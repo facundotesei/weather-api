@@ -1,8 +1,6 @@
 package challenge.redbee.services;
 
 import challenge.redbee.domain.Board;
-import challenge.redbee.domain.Locacion;
-
 
 public interface BoardService {
 

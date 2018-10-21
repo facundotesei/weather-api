@@ -12,4 +12,3 @@ public class Spring5MvcRestApplication {
     }
 }
 
-

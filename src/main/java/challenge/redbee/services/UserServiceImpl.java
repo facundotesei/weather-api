@@ -5,6 +5,8 @@ import challenge.redbee.exception.ResourceNotFoundException;
 import challenge.redbee.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -15,7 +17,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Iterable<User> getAllUsers() { return userRepository.findAll(); }
+    public List<User> getAllUsers() { return userRepository.findAll(); }
 
     @Override
     public User getUserById(Long id) { return userRepository.findById(id)
@@ -34,7 +36,7 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(() -> new ResourceNotFoundException("Usuario Inexistente"));
         user.setBoards(userDetails.getBoards());
         user.setMail(userDetails.getMail());
-        user.setNombre(userDetails.getNombre());
+        user.setName(userDetails.getName());
         return userRepository.save(user); //Parece mucho codigo para updatear algo.
     }                                     //Esta mal  la manera echa en locacion?
 }

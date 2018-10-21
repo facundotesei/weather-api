@@ -1,14 +1,12 @@
-package challenge.redbee.controllers;
+package challenge.redbee.controllers.v1;
 
 import challenge.redbee.domain.Locacion;
-import challenge.redbee.domain.User;
 import challenge.redbee.repositories.LocacionRepository;
 import challenge.redbee.services.LocacionService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
@@ -37,7 +35,7 @@ public class LocacionController {
     @ApiOperation(value="Get Locations", tags = { "Location" })
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public Iterable<Locacion> getLocaciones() { return locacionService.getAllLocaciones(); }
+    public List<Locacion> getLocaciones() { return locacionService.getAllLocaciones(); }
 
     @ApiOperation(value="Get Location By Id", tags = { "Location" })
     @GetMapping({"/{id}"})

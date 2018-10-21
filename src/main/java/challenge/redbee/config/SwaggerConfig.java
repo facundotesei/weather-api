@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class SwaggerConfig {
 
     @Bean
-    public Docket api(){
+    public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("challenge.redbee"))
@@ -27,13 +27,13 @@ public class SwaggerConfig {
                 .apiInfo(metaData());
     }
 
-    private ApiInfo metaData(){
+    private ApiInfo metaData() {
 
         Contact contact = new Contact("Tesei Facundo","","ftesei00@gmail.com");
 
         return new ApiInfo(
                 "Weather API",
-                "Weather API Consuming OpenWeatherMap",
+                "Weather API Consuming OpenWeatherMap Service.",
                 "1.0",
                 "",
                 contact,

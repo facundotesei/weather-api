@@ -1,4 +1,4 @@
-package challenge.redbee.controllers;
+package challenge.redbee.controllers.v1;
 
 import challenge.redbee.domain.User;
 import challenge.redbee.services.UserService;
@@ -6,6 +6,8 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(UserController.BASE_URL)
@@ -21,7 +23,7 @@ public class UserController {
     @ApiOperation(value="Get Users", tags = { "User" })
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public Iterable<User> getUsers() { return userService.getAllUsers(); }
+    public List<User> getUsers() { return userService.getAllUsers(); }
 
     @ApiOperation(value="Get User By Id", tags = { "User" })
     @GetMapping({"/{id}"})

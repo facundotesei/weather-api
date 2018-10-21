@@ -1,0 +1,5 @@
+.gitignore
+.mvn/
+.idea/
+exec.sh
+README.md

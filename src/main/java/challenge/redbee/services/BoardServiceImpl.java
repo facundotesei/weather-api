@@ -14,12 +14,12 @@ import org.springframework.web.client.RestTemplate;
 import java.util.HashSet;
 import java.util.Set;
 
+import static challenge.redbee.Constants.API_KEY;
+import static challenge.redbee.Constants.ROOT_URL;
+
 
 @Service
-public class BoardServiceImpl implements BoardService  {
-
-    public static final String API_KEY = "ac7c783b90a242b9dcbb219ff24b56b6"; //PONER LA API EN ENV VARIABLES
-    public static final String ROOT_URL = "http://api.openweathermap.org/data/2.5/weather?appid=";
+public class BoardServiceImpl implements BoardService {
 
     private BoardRepository boardRepository;
     private UserRepository userRepository;
@@ -54,7 +54,7 @@ public class BoardServiceImpl implements BoardService  {
     @Override
     public Board addLocacion(Long id, String lugar) {
 
-        String url = String.format("%s%s&q=%s,us",ROOT_URL,API_KEY,lugar); //Poner como Final o como env variable
+        String url = String.format("%s%s&q=%s,us",ROOT_URL,API_KEY,lugar);
         RestTemplate restTemplate = new RestTemplate();
         Locacion locacion = restTemplate.getForObject(url, Locacion.class);
         Board board = boardRepository.findById(id)

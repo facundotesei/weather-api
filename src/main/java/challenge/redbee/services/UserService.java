@@ -2,9 +2,11 @@ package challenge.redbee.services;
 
 import challenge.redbee.domain.User;
 
+import java.util.List;
+
 public interface UserService {
 
-    Iterable<User> getAllUsers();
+    List<User> getAllUsers();
 
     User getUserById(Long id);
 

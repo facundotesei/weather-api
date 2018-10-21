@@ -10,14 +10,16 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.validation.constraints.NotNull;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+
+import static challenge.redbee.Constants.API_KEY;
+import static challenge.redbee.Constants.ROOT_URL;
 
 @Service
 public class LocacionServiceImpl implements LocacionService {
 
     private static final Logger log = LoggerFactory.getLogger(LocacionServiceImpl.class);
-    public static final String API_KEY = "ac7c783b90a242b9dcbb219ff24b56b6";
-    public static final String ROOT_URL = "http://api.openweathermap.org/data/2.5/weather?appid="; //Env Variables
 
     private LocacionRepository locacionRepository;
 
@@ -32,7 +34,7 @@ public class LocacionServiceImpl implements LocacionService {
     }
 
     @Override
-    public Iterable<Locacion> getAllLocaciones() { return locacionRepository.findAll(); }
+    public List<Locacion> getAllLocaciones() { return locacionRepository.findAll(); }
 
     @Override
     public Locacion saveLocacion(Locacion locacion) { return locacionRepository.save(locacion); }
@@ -58,27 +60,30 @@ public class LocacionServiceImpl implements LocacionService {
 
     @Override
     public void fetchAndCompare(@NotNull Locacion locacion) {
-        String url = String.format("%s%s&q=%s,us",ROOT_URL,API_KEY,locacion.getName());     //REFACTOR
+        String url = String.format("%s%s&q=%s,us",ROOT_URL,API_KEY,locacion.getName());
         RestTemplate restTemplate = new RestTemplate();
         Locacion locacionApi = restTemplate.getForObject(url, Locacion.class);
         log.info(" DATA FETCHED : {} ",locacionApi );
+        compareLocations(locacion, locacionApi);
+    }
 
-        if(!locacion.equals(locacionApi) && !locacion.getWeather().equals(locacionApi.getWeather())){ //REFACTOR (la parte de compare en metodo separado)
+    private void compareLocations(Locacion locacion, Locacion locacionApi) {
+        if(!locacion.equals(locacionApi) && !locacion.getWeather().equals(locacionApi.getWeather())) {
             locacionApi.getClouds().setId(locacion.getClouds().getId());
             locacionApi.getCoord().setId(locacion.getCoord().getId());
             locacionApi.getMain().setId(locacion.getMain().getId());
+            locacionApi.getWind().setId(locacion.getWind().getId());
+
             if(!locacionApi.getWeather().isEmpty())
                 locacionApi.getWeather().get(0).setId(locacion.getWeather().get(0).getId()); //Solo Actualiza el primer elemento/
             else                                                                             //En la mayoria de los casos hay 1 solo weather.
                 locacionApi.setWeather(locacion.getWeather());                              // Pero Estados Grandes(Como Texas) tienen 2.
 
-            locacionApi.getWind().setId(locacion.getWind().getId());
             locacion = locacionRepository.save(locacionApi);
             log.info("~~~ SUCCESSFUL UPDATE! ~~~  : {} \n",locacion);
         }
         else {
             log.info(" THERE WERE NO CHANGES IN : {} \n",locacion.getName());
         }
-
     }
 }

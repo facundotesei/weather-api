@@ -17,7 +17,7 @@ public class ScheduledTasks {
     }
 
     @Scheduled(fixedRate = 20000)
-    public void reportCurrentTime() {
+    public void pollingWeatherService() {
         log.info(" || ====================== STARTING POLLING SERVICE. ====================== || \n");
         locacionService.updateLocaciones();
         log.info(" || ====================== POLLING SERVICE FINISHED. ====================== || \n\n\n\n");

@@ -1,4 +1,4 @@
-package challenge.redbee.controllers;
+package challenge.redbee.controllers.v1;
 
 import challenge.redbee.domain.Board;
 import challenge.redbee.services.BoardService;

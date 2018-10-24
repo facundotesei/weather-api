@@ -4,19 +4,19 @@ import challenge.redbee.domain.Board;
 import challenge.redbee.services.BoardService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.web.bind.annotation.*;
 
-
+@CrossOrigin
 @RestController
 @RequestMapping(BoardController.BASE_URL)
 @Api(value = "Board", description = "REST API for Board.", tags = { "Board" })
 public class BoardController {
 
     public static final String BASE_URL = "/boards";
-
     private BoardService boardService;
 
     public BoardController(BoardService boardService) {
@@ -40,7 +40,7 @@ public class BoardController {
     @ApiOperation(value="Create Board", tags = { "Board" })
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Board createNewBoard(@RequestBody Board board) { return boardService.saveBoard(board); }
+    public Board createNewBoard(@RequestParam("user") Long userId, @RequestBody Board board) { return boardService.saveBoard(board, userId); }
 
     @ApiOperation(value="Delete Board", tags = { "Board" })
     @DeleteMapping({"/{id}"})
@@ -53,7 +53,7 @@ public class BoardController {
     public Board addLocacion( @PathVariable Long id, @RequestParam("lugar") String lugar) { return boardService.addLocacion(id, lugar); }
 
     @ApiOperation(value="Remove Location", tags = { "Board" })
-    @GetMapping({"/{id}/removeLocacion"})
+    @DeleteMapping({"/{id}/removeLocacion"})
     @ResponseStatus(HttpStatus.OK)
     public void removeLocacion( @PathVariable Long id, @RequestParam("lugarId") Long lugarId) {  boardService.removeLocacion(id, lugarId); }
 

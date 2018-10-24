@@ -21,7 +21,7 @@ public class Locacion implements Serializable {
 
     private String name;
 
-    @OneToMany(fetch =FetchType.EAGER, cascade=CascadeType.ALL)//(fetch =FetchType.EAGER)
+    @OneToMany(fetch =FetchType.EAGER, cascade=CascadeType.ALL)
     private List<Weather> weather = new ArrayList<>();
 
     @OneToOne(cascade=CascadeType.ALL)

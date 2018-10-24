@@ -4,8 +4,8 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Data
@@ -23,8 +23,8 @@ public class User implements Serializable {
     private String mail;
 
 
-    @OneToMany
-    private Set<Board> boards = new HashSet<>();
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Board> boards = new ArrayList<>();
 
     public User(String name, String mail) {
         this.name = name;

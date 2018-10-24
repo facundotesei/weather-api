@@ -46,15 +46,26 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public Board saveBoard(Board board) { return boardRepository.save(board); }
+    public Board saveBoard(Board board, Long userId) { //Deberia llamarse desde el User Controller
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("Usuario Inexistente."));
+        Board savedBoard = boardRepository.save(board);
+        user.getBoards().add(savedBoard);
+        userRepository.save(user);              //Acceder a 2 Repo Parece Muy Costoso.
+        return savedBoard;                      //No funciona cuando guardo una locacion en board y desp quiero crear un board
+    }
 
     @Override
-    public void deleteById(Long id) { boardRepository.deleteById(id); }
+    public void deleteById(Long id) {  //Deberia llamarse desde el User Controller
+        User user = userRepository.findById(1L).get();
+        user.getBoards().remove(boardRepository.findById(id).get());
+        userRepository.save(user);
+    }
 
     @Override
     public Board addLocacion(Long id, String lugar) {
 
-        String url = String.format("%s%s&q=%s,us",ROOT_URL,API_KEY,lugar);
+        String url = String.format("%s%s&q=%s",ROOT_URL,API_KEY,lugar);
         RestTemplate restTemplate = new RestTemplate();
         Locacion locacion = restTemplate.getForObject(url, Locacion.class);
         Board board = boardRepository.findById(id)
@@ -71,7 +82,7 @@ public class BoardServiceImpl implements BoardService {
             board.setLocaciones(locaciones);
             return boardRepository.save(board);
         }
-        else throw new ResourceNotFoundException("Locacion Ya Existe En El Board");
+        else throw new ResourceNotFoundException("Locacion Ya Existe En El Board.");
     }
 
     @Override
@@ -79,10 +90,14 @@ public class BoardServiceImpl implements BoardService {
         Board board = boardRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Board Inexistente."));
         Locacion locacion = locacionRepository.findById(lugarId)
-                .orElseThrow(() -> new ResourceNotFoundException("Locacion Inexistente")); //Que pasa si la locacion esta en otro board?
-        board.getLocaciones().remove(locacion);                                             // Parece que se borra de todos los boards.
-        locacionRepository.deleteById(locacion.getId());
-        boardRepository.save(board);
+                .orElseThrow(() -> new ResourceNotFoundException("Locacion Inexistente.")); //Que pasa si la locacion esta en otro board?
+        if(board.getLocaciones().contains(locacion)) {
+            board.getLocaciones().remove(locacion);                                             // Parece que se borra de todos los boards.
+//        locacionRepository.deleteById(locacion.getId());
+            boardRepository.save(board);
+        }
+        else throw new ResourceNotFoundException("Locacion Existe pero no dentro de este Board.");
+
     }
 
 }

@@ -16,7 +16,7 @@ public class Weather implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // los  id weather se pueden repetir, fijarse como persistir solo un weather que lo compartan 1+ locacion
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String icon;

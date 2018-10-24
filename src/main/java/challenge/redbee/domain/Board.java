@@ -1,6 +1,7 @@
 package challenge.redbee.domain;
 
 import lombok.Data;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -19,10 +20,7 @@ public class Board  implements Serializable {
 
     private String name;
 
-    @ManyToMany(fetch = FetchType.EAGER,cascade = {
-            CascadeType.PERSIST,
-            CascadeType.MERGE
-    })
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
             name = "board_locacion",
             joinColumns = @JoinColumn(name = "board_id", referencedColumnName = "id"),

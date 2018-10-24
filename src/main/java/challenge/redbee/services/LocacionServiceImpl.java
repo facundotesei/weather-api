@@ -5,6 +5,7 @@ import challenge.redbee.exception.ResourceNotFoundException;
 import challenge.redbee.repositories.LocacionRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -22,9 +23,11 @@ public class LocacionServiceImpl implements LocacionService {
     private static final Logger log = LoggerFactory.getLogger(LocacionServiceImpl.class);
 
     private LocacionRepository locacionRepository;
+    private SimpMessagingTemplate template;
 
-    public LocacionServiceImpl(LocacionRepository locacionRepository) {
+    public LocacionServiceImpl(LocacionRepository locacionRepository, SimpMessagingTemplate template) {
         this.locacionRepository = locacionRepository;
+        this.template = template;
     }
 
     @Override
@@ -60,7 +63,7 @@ public class LocacionServiceImpl implements LocacionService {
 
     @Override
     public void fetchAndCompare(@NotNull Locacion locacion) {
-        String url = String.format("%s%s&q=%s,us",ROOT_URL,API_KEY,locacion.getName());
+        String url = String.format("%s%s&q=%s",ROOT_URL,API_KEY,locacion.getName());
         RestTemplate restTemplate = new RestTemplate();
         Locacion locacionApi = restTemplate.getForObject(url, Locacion.class);
         log.info(" DATA FETCHED : {} ",locacionApi );
@@ -80,6 +83,7 @@ public class LocacionServiceImpl implements LocacionService {
                 locacionApi.setWeather(locacion.getWeather());                              // Pero Estados Grandes(Como Texas) tienen 2.
 
             locacion = locacionRepository.save(locacionApi);
+            this.template.convertAndSend("/topic/all",locacion);
             log.info("~~~ SUCCESSFUL UPDATE! ~~~  : {} \n",locacion);
         }
         else {

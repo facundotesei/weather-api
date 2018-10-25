@@ -1,6 +1,8 @@
 target/
 !.mvn/wrapper/maven-wrapper.jar
 
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
 ### STS ###
 .apt_generated
 .classpath

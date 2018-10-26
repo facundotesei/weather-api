@@ -35,8 +35,22 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Usuario Inexistente"));
         user.setBoards(userDetails.getBoards());
-        user.setMail(userDetails.getMail());
+        user.setEmail(userDetails.getEmail());
         user.setName(userDetails.getName());
-        return userRepository.save(user); //Parece mucho codigo para updatear algo.
-    }                                     //Esta mal  la manera echa en locacion?
+        return userRepository.save(user);
+    }
+
+    @Override
+    public User getUserByEmail(String email) { return userRepository.findByEmail(email); }
+
+    @Override
+    public User saveOrReturn(User user) {
+        User userSaved = getUserByEmail(user.getEmail());
+        if(userSaved == null)
+            return userRepository.save(user);
+        else {
+            return userSaved;
+        }
+
+    }
 }

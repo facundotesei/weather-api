@@ -56,9 +56,9 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public void deleteById(Long id) {  //Deberia llamarse desde el User Controller
-        User user = userRepository.findById(1L).get();
-        user.getBoards().remove(boardRepository.findById(id).get());
+    public void deleteById(Long id, Long userId) {  //Deberia llamarse desde el User Controller
+        User user = userRepository.findById(userId).get();
+        user.getBoards().remove(boardRepository.findById(id).get()); //refactor
         userRepository.save(user);
     }
 

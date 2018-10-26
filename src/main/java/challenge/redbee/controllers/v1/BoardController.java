@@ -10,7 +10,6 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin
 @RestController
 @RequestMapping(BoardController.BASE_URL)
 @Api(value = "Board", description = "REST API for Board.", tags = { "Board" })
@@ -23,9 +22,6 @@ public class BoardController {
         this.boardService = boardService;
     }
 
-    @MessageMapping("/getBoard")
-    @SendTo("/topic/board")
-    public Board board(String id) throws Exception { return boardService.getBoardById(Long.parseLong(id)); }
 
     @ApiOperation(value="Get Boards By User Id", tags = { "Board" })
     @GetMapping
@@ -45,7 +41,7 @@ public class BoardController {
     @ApiOperation(value="Delete Board", tags = { "Board" })
     @DeleteMapping({"/{id}"})
     @ResponseStatus(HttpStatus.OK)
-    public void deleteBoard(@PathVariable Long id) { boardService.deleteById(id); }
+    public void deleteBoard(@PathVariable Long id, @RequestParam("user") Long userId) { boardService.deleteById(id, userId); }
 
     @ApiOperation(value="Add Location", tags = { "Board" })
     @GetMapping({"/{id}/addLocacion"})

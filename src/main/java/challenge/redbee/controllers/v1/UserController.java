@@ -33,7 +33,7 @@ public class UserController {
     @ApiOperation(value="Create User", tags = { "User" })
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public User createNewUser(@RequestBody User user) { return userService.saveUser(user); }
+    public User createNewUser(@RequestBody User user) { return userService.saveOrReturn(user); }
 
     @ApiOperation(value="Delete User By Id", tags = { "User" })
     @DeleteMapping({"/{id}"})

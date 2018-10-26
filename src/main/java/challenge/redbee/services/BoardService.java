@@ -14,7 +14,7 @@ public interface BoardService {
 
     void removeLocacion(Long id, Long lugarId);
 
-    void  deleteById(Long id);
+    void  deleteById(Long id, Long userId);
 
 
 

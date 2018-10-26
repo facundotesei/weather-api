@@ -78,9 +78,9 @@ public class LocacionServiceImpl implements LocacionService {
             locacionApi.getWind().setId(locacion.getWind().getId());
 
             if(!locacionApi.getWeather().isEmpty())
-                locacionApi.getWeather().get(0).setId(locacion.getWeather().get(0).getId()); //Solo Actualiza el primer elemento/
-            else                                                                             //En la mayoria de los casos hay 1 solo weather.
-                locacionApi.setWeather(locacion.getWeather());                              // Pero Estados Grandes(Como Texas) tienen 2.
+                locacionApi.getWeather().get(0).setId(locacion.getWeather().get(0).getId());
+            else
+                locacionApi.setWeather(locacion.getWeather());
 
             locacion = locacionRepository.save(locacionApi);
             this.template.convertAndSend("/topic/all",locacion);

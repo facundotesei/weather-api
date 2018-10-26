@@ -17,8 +17,18 @@ import java.util.Arrays;
 
 
 @Configuration
-@EnableWebSecurity(debug = true)
+@EnableWebSecurity
 public class Auth0Config extends WebSecurityConfigurerAdapter {
+
+    private static final String[] AUTH_WHITELIST = {
+            "/v2/api-docs",
+            "/swagger-resources",
+            "/swagger-resources/**",
+            "/swagger-ui.html",
+            "/webjars/**",
+            "/ws/**",
+            "/topic/all"
+    };
 
     @Value(value = "${auth0.apiAudience}")
     private String apiAudience;
@@ -31,7 +41,7 @@ public class Auth0Config extends WebSecurityConfigurerAdapter {
         configuration.setAllowedOrigins(Arrays.asList("*"));
         configuration.setAllowedMethods(Arrays.asList("GET","POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowCredentials(true);
-        configuration.addAllowedHeader("*"); //Authorization
+        configuration.addAllowedHeader("*");
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
@@ -45,9 +55,9 @@ public class Auth0Config extends WebSecurityConfigurerAdapter {
                 .configure(http)
                 .authorizeRequests()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                .antMatchers("/ws/**").permitAll()
-                .antMatchers("/topic/all").permitAll() //No se si hace falta
-                .anyRequest().authenticated();
+                .antMatchers(AUTH_WHITELIST).permitAll();
+//                .anyRequest().authenticated();
     }
+
 
 }

@@ -43,7 +43,7 @@ public class LocacionController {
     public Locacion getLocacionById(@PathVariable Long id) { return locacionService.getLocacionById(id); }
 
     @ApiOperation(value="Update Location from API", tags = { "Location" })
-    @GetMapping({"/{id}/update"})   //Testing FetchAndCompare . Borrarlo Despues
+    @GetMapping({"/{id}/update"})
     @ResponseStatus(HttpStatus.OK)
     public void update(@PathVariable Long id) {
         Locacion locacion = locacionRepository.findById(id).get();

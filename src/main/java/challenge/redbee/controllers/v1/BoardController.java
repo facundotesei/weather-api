@@ -4,10 +4,8 @@ import challenge.redbee.domain.Board;
 import challenge.redbee.services.BoardService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.SendTo;
+
 import org.springframework.web.bind.annotation.*;
 
 @RestController

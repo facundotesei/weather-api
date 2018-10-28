@@ -56,7 +56,6 @@ public class UserControllerTest {
         mockMvc.perform(get(UserController.BASE_URL)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
-//                .andExpect(jsonPath("$.users", hasSize(2)));
     }
 
     @Test

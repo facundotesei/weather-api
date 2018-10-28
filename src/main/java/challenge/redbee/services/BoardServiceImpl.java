@@ -99,7 +99,6 @@ public class BoardServiceImpl implements BoardService {
                 .orElseThrow(() -> new ResourceNotFoundException("Locacion Inexistente."));
         if(board.getLocaciones().contains(locacion)) {
             board.getLocaciones().remove(locacion);
-//        locacionRepository.deleteById(locacion.getId());
             boardRepository.save(board);
         }
         else throw new ResourceNotFoundException("Locacion Existe pero no dentro de este Board.");

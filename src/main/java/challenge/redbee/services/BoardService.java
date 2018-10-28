@@ -2,9 +2,11 @@ package challenge.redbee.services;
 
 import challenge.redbee.domain.Board;
 
+import java.util.List;
+
 public interface BoardService {
 
-    Iterable<Board> getAllBoards(Long userId);
+    List<Board> getAllBoards(Long userId);
 
     Board getBoardById(Long id);
 

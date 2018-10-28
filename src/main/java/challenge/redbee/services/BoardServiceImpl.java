@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import static challenge.redbee.Constants.API_KEY;
@@ -33,7 +34,7 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public Iterable<Board> getAllBoards(Long id) {
+    public List<Board> getAllBoards(Long id) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Usuario Inexistente."));
         return user.getBoards();

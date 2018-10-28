@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(BoardController.BASE_URL)
 @Api(value = "Board", description = "REST API for Board.", tags = { "Board" })
@@ -24,7 +26,7 @@ public class BoardController {
     @ApiOperation(value="Get Boards By User Id", tags = { "Board" })
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public Iterable<Board> getBoardsByUser(@RequestParam("user") Long userId) { return boardService.getAllBoards(userId); }
+    public List<Board> getBoardsByUser(@RequestParam("user") Long userId) { return boardService.getAllBoards(userId); }
 
     @ApiOperation(value="Get Board By Id", tags = { "Board" })
     @GetMapping({"/{id}"})

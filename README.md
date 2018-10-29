@@ -1,2 +1,2 @@
 # weather-api
-https://challenge-weather-api.herokuapp.com/
+Deploy: https://challenge-weather-api.herokuapp.com/
